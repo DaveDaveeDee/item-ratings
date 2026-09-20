@@ -1,0 +1,22 @@
+{
+  "name": "item-ratings",
+  "version": "1.0.0",
+  "description": "[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=flat&logo=vuedotjs&logoColor=4FC08D)](https://vuejs.org/) [![Serverless Framework](https://img.shields.io/badge/Serverless-FD5750?style=flat&logo=serverless&logoColor=white)](https://www.serverless.com/) [![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaveDaveeDee/item-ratings.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DaveDaveeDee/item-ratings/issues"
+  },
+  "homepage": "https://github.com/DaveDaveeDee/item-ratings#readme",
+  "devDependencies": {
+    "serverless": "^4.42.0"
+  }
+}
