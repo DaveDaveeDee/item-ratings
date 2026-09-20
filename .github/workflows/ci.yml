@@ -31,5 +31,6 @@ jobs:
         run: npx serverless print --stage dev
         env:
           # Dummy-värden för att Serverless ska kunna validera variabler i yml utan riktiga AWS-nycklar
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
           AWS_ACCESS_KEY_ID: 'mock'
           AWS_SECRET_ACCESS_KEY: 'mock'
