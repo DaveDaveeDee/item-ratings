@@ -26,11 +26,20 @@ provider:
 
 functions:
   healthCheck:
-    handler: src/api/health.handler
+    handler: dist/api/health.handler
     events:
       - httpApi:
           path: /health
           method: GET
+    name: item-ratings-dev-healthCheck
+
+    createItem:
+      handler: dist/api/create.handler
+      events:
+        - httpApi:
+            path: /items
+            method: POST
+      name: item-ratings-dev-createItem
 
 resources:
   Resources:
