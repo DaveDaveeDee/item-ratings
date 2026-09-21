@@ -1,18 +1,27 @@
-import {dynamoDb, TABLE_NAME} from "./dynamodb";
-import {PutCommand} from "@aws-sdk/lib-dynamodb";
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, PutCommand, GetCommand } from "@aws-sdk/lib-dynamodb";
 
-export interface Item {
-    id: string;
-    title: string;
-    rating: number;
-}
+const client = new DynamoDBClient({});
+const docClient = DynamoDBDocumentClient.from(client);
 
-export async function createItem(item: Item): Promise<Item> {
-    const command = new PutCommand({
+const TABLE_NAME = process.env.ITEMS_TABLE || "item-ratings-dev";
+
+export async function createItem(item: any) {
+    const params = {
         TableName: TABLE_NAME,
         Item: item,
-    })
+    };
 
-    await dynamoDb.send(command);
+    await docClient.send(new PutCommand(params));
     return item;
+}
+
+export async function getItem(id: string) {
+    const params = {
+        TableName: TABLE_NAME,
+        Key: { id },
+    };
+
+    const response = await docClient.send(new GetCommand(params));
+    return response.Item;
 }

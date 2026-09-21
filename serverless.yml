@@ -41,6 +41,14 @@ functions:
             method: POST
       name: item-ratings-dev-createItem
 
+    getItem:
+      handler: dist/api/get.handler
+      events:
+        - httpApi:
+            path: /items/{id}
+            method: GET
+      name: item-ratings-dev-getItem
+
 resources:
   Resources:
     ItemsTable:
