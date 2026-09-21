@@ -1,5 +1,5 @@
 import {DynamoDBClient} from "@aws-sdk/client-dynamodb";
-import {DynamoDBDocumentClient, PutCommand, GetCommand, UpdateCommand} from "@aws-sdk/lib-dynamodb";
+import {DynamoDBDocumentClient, PutCommand, GetCommand, UpdateCommand, DeleteCommand} from "@aws-sdk/lib-dynamodb";
 
 const client = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(client);
@@ -58,4 +58,14 @@ export async function updateItem(id: string, attributes: Record<string, any>) {
 
     const response = await docClient.send(new UpdateCommand(params));
     return response.Attributes;
+}
+
+export async function deleteItem(id: string) {
+    const params = {
+        TableName: TABLE_NAME,
+        Key: {id},
+    };
+
+    await docClient.send(new DeleteCommand(params));
+    return {message: `Item with id ${id} deleted successfully`};
 }

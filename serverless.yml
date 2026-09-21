@@ -58,6 +58,14 @@ functions:
       name:
         item-ratings-dev-updateItem
 
+    deleteItem:
+      handler: dist/api/delete.handler
+      events:
+        - httpApi:
+            path: /items/{id}
+            method: DELETE
+      name: item-ratings-dev-deleteItem
+
 resources:
   Resources:
     ItemsTable:
