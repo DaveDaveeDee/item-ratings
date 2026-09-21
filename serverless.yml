@@ -8,12 +8,74 @@ provider:
   region: eu-north-1
   stage: dev
   environment:
+    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
     NODE_OPTIONS: "--enable-source-maps"
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - !GetAtt ItemsTable.Arn
 
 functions:
   healthCheck:
-    handler: src/api/health.handler
+    handler: dist/api/health.handler
     events:
       - httpApi:
           path: /health
           method: GET
+    name: item-ratings-dev-healthCheck
+
+    createItem:
+      handler: dist/api/create.handler
+      events:
+        - httpApi:
+            path: /items
+            method: POST
+      name: item-ratings-dev-createItem
+
+    getItem:
+      handler: dist/api/get.handler
+      events:
+        - httpApi:
+            path: /items/{id}
+            method: GET
+      name: item-ratings-dev-getItem
+
+    updateItem:
+      handler: dist/api/update.handler
+      events:
+        - httpApi:
+            path: /items/{id}
+            method: PUT
+      name:
+        item-ratings-dev-updateItem
+
+    deleteItem:
+      handler: dist/api/delete.handler
+      events:
+        - httpApi:
+            path: /items/{id}
+            method: DELETE
+      name: item-ratings-dev-deleteItem
+
+resources:
+  Resources:
+    ItemsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH

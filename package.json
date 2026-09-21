@@ -4,6 +4,7 @@
   "description": "[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![Vue.js](https://img.shields.io/badge/Vue.js-35495E?style=flat&logo=vuedotjs&logoColor=4FC08D)](https://vuejs.org/) [![Serverless Framework](https://img.shields.io/badge/Serverless-FD5750?style=flat&logo=serverless&logoColor=white)](https://www.serverless.com/) [![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/)",
   "main": "index.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +18,13 @@
   },
   "homepage": "https://github.com/DaveDaveeDee/item-ratings#readme",
   "devDependencies": {
-    "serverless": "^4.42.0"
+    "@types/aws-lambda": "^8.10.163",
+    "@types/node": "^26.6.2",
+    "serverless": "^4.42.0",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1136.0",
+    "@aws-sdk/lib-dynamodb": "^3.1136.0"
   }
 }
