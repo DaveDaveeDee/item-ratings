@@ -49,6 +49,15 @@ functions:
             method: GET
       name: item-ratings-dev-getItem
 
+    updateItem:
+      handler: dist/api/update.handler
+      events:
+        - httpApi:
+            path: /items/{id}
+            method: PUT
+      name:
+        item-ratings-dev-updateItem
+
 resources:
   Resources:
     ItemsTable:
